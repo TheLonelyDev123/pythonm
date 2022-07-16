@@ -61,7 +61,7 @@ class Gui(Widget):
 		if self.jump_bt.collide_point(*touch.pos):
 			if self.parent.g.allow:
 				if self.parent.g.double_jump>0:
-					self.parent.g.vy=23
+					self.parent.g.vy=40
 				#	self.parent.ggravity_accel=True
 					self.parent.g.allow=False
 		if self.mode.collide_point(*touch.pos):
@@ -108,7 +108,7 @@ class GameMain(Widget):
 		self.shift=0
 		self.allow=True
 		self.gravity_accel=1
-		self.gravity=-1
+		self.gravity=-3
 		self.speed=10
 		self.vx=0
 		self.jump_speed=30
@@ -209,9 +209,11 @@ class GameMain(Widget):
 				if self.player.collide_widget(child):
 					if self.vx <0:
 						self.player.x=child.x+101
+						self.allow = True
 						
 					elif self.vx>0:
 						self.player.x=child.x-81
+						self.allow = True
 						
 		
 					
@@ -268,7 +270,7 @@ class GameMain(Widget):
 #			
 	def update(self,dt):
 		self.hor_move()
-		
+		print(dt)
 		self.ver_move()
 		self.shiftw()	
 #		print(self.health)
@@ -324,7 +326,7 @@ class GameMain(Widget):
 
 class GameApp(App):
 	def build(self):
-	#	Window.clearcolor=(0,0,0,255)
+		Window.clearcolor=(0,0.0,0.0,1)
 		game=Mainrun()		
 		
 		return game		
